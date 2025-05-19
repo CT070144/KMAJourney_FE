@@ -1,0 +1,45 @@
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/images/appleLogin.png');
+    background-size:cover;
+    background-repeat: no-repeat;
+    user-select: none;
+
+}
+.infor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--primary);
+    margin-top: 10rem;
+}
+
+.greeting,
+.author {
+    text-align: center;
+}
+.author {
+    font-size: 2.4rem;
+    padding: 1rem 0;
+}
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+.social-btn {
+    font-size: 5rem;
+    padding: 1rem;
+}
+
+.social-btn ~ .social-btn {
+    margin-left: 2rem;
+}
+.large-50 {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}

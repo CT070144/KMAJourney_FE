@@ -1,0 +1,166 @@
+1 creacte-react-app kmajourney
+2 npm start
+3 npm install react-router-dom
+4 npm install scss sass
+5 npm install classnames
+6 npm install customize-cra react-app-rewired --dev (config webpack)
+10 npm install @babel/core @babel/cli @babel/preset-env @babel/preset-react --save-dev... (chuyển JSX sang JS)
+12 npm install --save-dev babel-plugin-module-resolver (link alias)
+13 prettier format code
+14 npm install --save normalize.css
+//Khi bạn viết [className]: className, nếu className không tồn tại trong styles, nó sẽ bị giữ nguyên, tức là không bị module hóa
+
+HOOK
+1.useState()
+const [state,setState] = useState(initialState);
+
+state là 1 biến chứa giá trị hiện tại của state
+setState là 1 hàm để thay đổi giá trị của state
+initialState: giá trị ban đầu của state chỉ được sử dụng 1 lần duy nhất khi component được render lần đầu tiên
+
+-   Khi gọi setState thì React sẽ tự động re-render lại component
+-   Đối số truyền vào của setState có thể là giá trị mới hoặc là một hàm
+-   Đối số của hàm setState truyền vào là giá trị hiện tại của state
+
+    2.useEffect()
+
+-   chạy sau khi component đã được render
+    useEffect(callback)
+-   CallBack luôn được gọi sau khi component được mount hoặc re-render
+
+useEffect(callback,[])
+
+-   CallBack chỉ được gọi 1 lần sau khi component được mount và không gọi lại khi component re-render
+
+useEffect(callback,[dependencies])
+
+-   useEffect() không làm component re-render, mà chỉ chạy lại callback khi dependencies thay đổi
+-   dependencies: là mảng chứa các biến cần theo dõi
+-   CallBack chỉ được gọi lại khi 1 trong các biến trong dependencies thay đổi giá trị
+-   return về 1 hàm để dọn dẹp khi component bị unmount, hàm này sẽ được gọi trước khi component bị unmount hoặc trước khi useEffect chạy lần tiếp theo khi dependencies thay đổi
+    React biết khi nào một component bị unmount vì:
+
+1️⃣ React có hệ thống Virtual DOM (VDOM) để theo dõi trạng thái component.
+2️⃣ Khi một component không còn tồn tại trong cây component nữa (do điều kiện if, chuyển trang, v.v.), React sẽ tự động gọi hàm cleanup trước khi xóa nó khỏi DOM.
+
+useRef()
+
+-   useRef() trả về một đối tượng có thuộc tính current
+-   giá trị của current sẽ không thay đổi khi component re-render
+
+memo -- giúp tối ưu hóa performance cho component
+
+-   memo() giúp component chỉ re-render lại 1 component(con) khi props thay đổi
+-   memo() trong React tự động so sánh giá trị của props trước và sau khi component re-render
+-   khi truyền function vào props, memo() sẽ không hoạt động vì function luôn thay đổi giá trị mỗi khi component re-render
+
+useCallback(function,dependencies)
+
+-   useCallback() lưu tham chiếu của function và chỉ tạo ra một tham chiếu mới khi dependencies thay đổi
+-   useCallback() giúp tránh việc tạo ra function mới mỗi khi component re-render => memo() không cần re-render khi function không thay đổi
+
+useMemo(callback,dependencies) -- giúp tối ưu hóa performance cho function
+
+-   useMemo() giúp tối ưu hóa performance bằng cách lưu kết quả của callback và chỉ tính toán lại khi dependencies thay đổi
+-   useMemo() trả về kết quả của callback
+
+useReducer -- giúp quản lý state của component
+const [state,dispatch] = useReducer(reducer,initialState)
+1.initialState
+2.reducer(state,action)
+
+-   state: giá trị hiện tại của state
+    3.dispatch(action) => gửi action đến reducer(state,action) => trả về giá trị mới của state
+-   hàm để gửi action đến reducer
+
+context && useContext
+
+-   context giúp truyền dữ liệu từ component cha đến component con mà không cần truyền qua props
+-   const context = createContext() => tạo ra 1 context với giá trị mặc định
+-   <context.Provider value={data}> => truyền dữ liệu từ component cha
+-   const data = useContext(context) => lấy dữ liệu từ context trong component con
+
+useImpertiveHandle(ref,callback) - đóng gói các phương thức của component con
+
+-   useImpertiveHandle giúp tạo ra 1 ref mà có thể truy cập từ component cha
+-   ref: ref được truyền vào từ component cha
+-   callback: trả về 1 object chứa các phương thức => component cha có thể gọi các phương thức này thông qua ref = useRef()
+
+clsx -- giúp kết hợp nhiều class name
+clsx trả về một chuỗi => gán vào classname = clsx('class1','class2',...)
+Trong clsx(), bạn có thể truyền vào object {} vì clsx sẽ xử lý key-value theo logic
+Nếu value là true, key sẽ được thêm vào className
+Nếu value là false, key sẽ bị loại bỏ
+
+file có đuôi .module.scss hoặc module.css
+
+-   css module giúp tạo ra các class name duy nhất cho từng component
+ 
+Redux
+// Reducers
+là 1 function nhận vào 2 tham số là state và action, trả về state mới
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return { ...state, 
+                count: state.count + 1 }; // không được thay đổi state trực tiếp mà phải tạo bản copy
+        case 'DECREMENT':
+            return {
+                ...state, 
+                count: state.count - 1 };
+        default:
+            return state;
+    }
+};
+
+//Actions
+là 1 object chứa các thông tin cần thiết để thay đổi state
+const increment  = {
+        type: 'INCREMENT',
+        payload: 10;
+}; => action có action.type là 'INCREMENT' và action.payload là 10
+một action creater
+const incrementCreator = ()=>{
+    return {
+        type: 'INCREMENT',
+        payload: 10;
+    }
+}
+//Dispatch
+
+ React hook form
+1. useForm() -- tạo ra 1 form
+2. register() -- đăng ký các input, select, textarea
+3. handleSubmit() -- xử lý submit form
+4. errors -- lưu trữ các lỗi của 
+5. formState -- lưu trữ trạng thái của form
+formState là một object trong React Hook Form chứa thông tin về trạng thái của form, bao gồm lỗi, tính hợp lệ, trạng thái nhập liệu, v.v.
+6. watch() -- theo dõi giá trị của input, select, textarea
+
+
+
+const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    mode: 'onBlur', // Mặc định onSubmit
+    resolver: yupResolver(schema),
+});
+
+// Đăng ký input
+register('name', {
+    required: 'Vui lòng nhập tên',
+    minLength: { value: 5, message: 'Tên phải có ít nhất 5 ký tự' },
+    validate: value => value === 'admin' || 'Tên phải là admin',
+});
+
+register(name, options)
+required	boolean | string	Xác định input có bắt buộc hay không. Nếu là chuỗi, nó sẽ là thông báo lỗi.
+min	number | { value: number, message: string }	Giá trị tối thiểu (dùng cho số).
+max	number | { value: number, message: string }	Giá trị tối đa (dùng cho số).
+minLength	number | { value: number, message: string }	Số ký tự tối thiểu (dùng cho chuỗi).
+maxLength	number | { value: number, message: string }	Số ký tự tối đa (dùng cho chuỗi).
+pattern	RegExp | { value: RegExp, message: string }	Regex để kiểm tra định dạng input.
+validate	function | object	Hàm custom validation. Có thể truyền một hoặc nhiều hàm.
+valueAsNumber	boolean	Chuyển đổi giá trị thành số (parseFloat).
+valueAsDate	boolean	Chuyển đổi giá trị thành Date (new Date(value)).
+setValueAs	(value) => any	Hàm chuyển đổi giá trị trước khi lưu vào state.
+disabled	boolean	Nếu true, input bị vô hiệu hóa.
+

@@ -1,0 +1,53 @@
+@import 'normalize.css'; //reset css xóa sạch toàn bộ style mặc định để thiết kế từ đầu
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary: #222831;
+
+    --transparent: #e6ebf8;
+    --white: #ffffff;
+    --red: #8a1000;
+    --wrapper-width: 120rem;
+    --black: #000000;
+    --seperator: #e4e7ed;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+    font-size: 1.8rem;
+    text-rendering: optimizespeed;
+}
+
+input {
+    border-radius: 1rem;
+    padding: 0 1rem;
+    font-size: 1.9rem;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+a {
+    text-decoration: none;
+    color: #000000;
+}
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
