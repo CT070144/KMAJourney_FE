@@ -6,15 +6,15 @@
     justify-content: center;
 }
 .search {
-    width: 60rem;
+    width: 50rem;
     display: flex;
-    height: 6rem;
+    height: 5rem;
     border: 2px solid var(--primary);
     border-radius: 99px;
     .icon {
         font-size: 2.5rem;
         color: var(--white);
-        opacity: 0.8;
+       
     }
     padding: 0;
     .btn {

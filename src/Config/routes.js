@@ -6,8 +6,13 @@ const paths = {
     verify: '/auth/verify',
     auth: '/auth',
     score: '/score',
-    administration: '/score',
     about: '/score',
-    myshop: '/score'
+    myshop: '/score',
+    administration: '/admin',
+    studentList: '/admin/student-list',
+    addStudent: '/admin/add-student',
+    subjects: '/admin/subjects',
+    addScore: '/admin/add-score',
+    scoreList: '/admin/score-list',
 };
 export default paths;

@@ -25,7 +25,7 @@ function TopHeader() {
                 </div>
             </div>
             <Button icon={<FontAwesomeIcon icon={faRightFromBracket} />} className={cx('btn')} to={paths.login}>
-                Logout
+                LOG OUT 
             </Button>
         </div>
     );

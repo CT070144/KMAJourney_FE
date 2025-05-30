@@ -1,0 +1,160 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+
+    h2 {
+        color: #333;
+        margin: 0;
+        font-size: 24px;
+    }
+}
+
+.uploadSection {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
+.uploadBtn, .importBtn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.uploadBtn {
+    background-color: #4CAF50;
+    color: white;
+
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
+.importBtn {
+    background-color: #2196F3;
+    color: white;
+
+    &:hover {
+        background-color: #1976D2;
+    }
+}
+
+.content {
+    padding: 20px 0;
+}
+
+.scoreForm {
+    display: grid;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-weight: 500;
+        color: #555;
+        font-size: 14px;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+    }
+}
+
+.readOnlyInput {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.info {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.submitBtn {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .uploadSection {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .uploadBtn, .importBtn {
+        width: 100%;
+    }
+
+    .formGroup input {
+        font-size: 16px;
+    }
+}
+.fileInput {
+    width: 24rem;
+    font-size: 1.5rem;
+    border: 1px solid #000000;
+    padding: 5px;
+
+}

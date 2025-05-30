@@ -2,9 +2,12 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import Styles from './Sidebar.module.scss';
 import { Link } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 const cx = classNames.bind(Styles);
 function Sidebar({ items }) {
+   
+    
+ 
     const [activeItem, setActiveItem] = useState('KMA Score');
     const handleClickItem = (item) => {
         setActiveItem(item);

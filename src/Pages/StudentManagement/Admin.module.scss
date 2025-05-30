@@ -1,0 +1,100 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    user-select: none;
+    border-bottom: 1px solid #8d8d8d;
+}
+.main{
+    flex: 1;
+    height: inherit;
+    overflow:scroll;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;    
+    height: 100vh;
+    
+}
+.title {
+    
+    align-self: center;
+    font-family:'Times New Roman', Times, serif;
+    
+    line-height: 100%;
+}
+.menu-icon {
+    font-size: 3.2rem;
+    color: #000;
+    position: absolute;
+    left: 30px;
+    top: 15px;
+    
+    padding: 1.2rem;
+    border-radius: 50%;
+
+}
+.menu-icon:hover {
+    background-color: var(--transparent);
+    color: var(--primary);
+}
+.menu-icon:active {
+    scale: 1.1;
+}
+.sidebar {
+    user-select: none;
+    width: 18%;
+    height: 100vh;
+    background-color: var(--primary);
+    animation: slideIn .3s ease-in-out;
+    border-right: 1px solid #000;
+    
+    transform: translateX(0);
+    overflow-y: auto;
+}
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+.menu-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 16px 20px;
+    color: #fff;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-80%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+.menu-list {
+    padding-top: 30px;
+    list-style: none;
+    position: relative;
+}
+.list-icon {
+    position: absolute;
+    right: 10px;
+    top: 14px;
+}
+.menu-item {
+    position: relative;
+    border-radius: 10px;
+    
+    font-size: 18px;
+    color: #fff;
+}
+.menu-item:hover {
+    background-color: #8f8f8f;
+}

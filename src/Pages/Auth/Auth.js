@@ -18,8 +18,8 @@ function Auth() {
                 <div>
                     <ReactLogo />
                     <div className={cx('infor')}>
-                        <h1 className={cx('greeting')}>WELCOME TO KMAJOURNEY</h1>
-                        <span className={cx('author')}>Developed by Lucas</span>
+                        <h1 className={cx('greeting')}>WELCOME TO KMA JOURNEY</h1>
+                        <u className={cx('author')}>Developed by NGUYENPHUC</u>
                         <div className={cx('social-links')}>
                             <Button
                                 className={cx('social-btn')}

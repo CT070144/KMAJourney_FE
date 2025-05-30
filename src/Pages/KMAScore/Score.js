@@ -1,8 +1,6 @@
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Styles from './Score.module.scss';
-import Header from '~/components/Layouts/Header';
-import Footer from '~/components/Layouts/Footer';
 import { faChartSimple, faCircleCheck, faExclamation, faFeatherPointed, faRoadCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
 import axios from 'axios';
@@ -22,22 +20,24 @@ function Score() {
     console.log(studentCode);
 
     try{
-        const response = await axios.get(`${API_URL}/hocphan/${studentCode}`);
-        console.log(response);
-        setResult(response.data.result);
-        const studentInfo = response.data.result[0];
+        const response = await axios.get(`${API_URL}/ketqua/${studentCode}`);
+        
+        
+
+        
+        const studentInfo = response.data.result.sinhVien;
         setInfor({
-            name: studentInfo[1],
-            studentCode: studentInfo[0],
-            class: studentInfo[2],
-            major: studentInfo[3]
+            name: studentInfo.ten_sinh_vien,
+            studentCode: studentInfo.ma_sinh_vien,
+            class: studentInfo.lop,
+           major: studentInfo.khoa
         });
-        setDataFiltered(DataFilter(response.data.result));
-        console.log(infor);
+        setResult(response.data.result.diem);
+        setDataFiltered(DataFilter(response.data.result.diem));
 
     }
     catch(error){
-       toast.error('Lỗi khi lấy dữ liệu');
+       console.log(error);
     }
     
 
@@ -47,7 +47,6 @@ function Score() {
 
     return (
         <div className={cx('wrapper')}>
-            <Header title="KMA SCORE" icon={<FontAwesomeIcon icon={faFeatherPointed} />} />
             <div className={cx('container')}>
             <div className={cx('fetch_field')}>
             <form action="" className={cx('fetch_field_form')} onSubmit={handleSubmit}>
@@ -125,18 +124,18 @@ function Score() {
                         </thead>
                         <tbody>
                             {
-                                result.map((item, index) => (
+                                result.map((diem, index) => (
                                     <tr key={index}
-                                     className={item[7]<4||item[8]<4?cx('table_row_failed'):cx('')}
+                                     className={diem.diem_thi<4||diem.diem_tong_ket<4?cx('table_row_failed'):cx('')}
                                     >
                                         <td className={cx('index_table')}>{index + 1}</td>
-                                        <td className={cx('subject_name')}>{item[4]}</td>
-                                        <td className={cx('score_table')}>{item[5]}</td>
-                                        <td className={cx('score_table')}>{item[6]}</td>
-                                        <td className={cx('score_table')}>{item[7]}</td>
-                                        <td className={cx('score_table')}>{item[8]}</td>
-                                        <td className={cx('score_table')}>{item[9]}</td>
-                                        <td className={cx('score_table')}>{item[10]}</td>
+                                        <td className={cx('subject_name')}>{diem.ten_hoc_phan}</td>
+                                        <td className={cx('score_table')}>{diem.diem_thanh_phan1}</td>
+                                        <td className={cx('score_table')}>{diem.diem_thanh_phan2}</td>
+                                        <td className={cx('score_table')}>{diem.diem_thi}</td>
+                                        <td className={cx('score_table')}>{diem.diem_tong_ket}</td>
+                                        <td className={cx('score_table')}>{diem.diem_chu}</td>
+                                        <td className={cx('score_table')}>{diem.hocKy}</td>
                                     </tr>
                                 ))
                             }
@@ -145,8 +144,6 @@ function Score() {
                 </div>
             </div>}
             </div> 
-
-            <Footer />
         </div> 
     );
 }

@@ -4,19 +4,19 @@ import styles from './LoginForm.module.scss';
 import Button from '~/components/Button';
 import paths from '~/Config/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { API_URL } from '~/Config/APIconfig';
-
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function LoginForm() {
-   
+    const [loading, setLoading] = useState(false);
    
     const navigate = useNavigate();
       
@@ -34,42 +34,57 @@ function LoginForm() {
 
     
 
-    const onSubmit = async (data) => {
-
-
-        try {
-            const response = await fetch(`${API_URL}/auth`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const dataResponse = await response.json();
-            if(dataResponse.result.authenticated){
-                toast.success('Đăng nhập thành công!');
-                setTimeout(() => {
-                    navigate(paths.score);
-                }, 500);
-            } else {
-               setError('password', { message: 'Sai mật khẩu!' });
-                toast.error('Sai mật khẩu!');
-            }
-        } catch (error) {
+    const onSubmit = (data) => {
+        setLoading(true);
+        setTimeout(async () => {
+            try {
             
-        
-            toast.error('Tài khoản không tồn tại');
-        }
+                const response = await fetch(`${API_URL}/auth/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+    
+                const dataResponse = await response.json();
+                if(dataResponse.result.authenticated){
+                   
+                    toast.success('Đăng nhập thành công!');
+                    setTimeout(() => {
+                        navigate(paths.score);
+                    }, 200);
+                } else {
+                   
+                   setError('password', { message: 'Sai mật khẩu!' });
+                    toast.error('Sai mật khẩu!');
+                }
+            } catch (error) {
+                
+            
+                toast.error('Tài khoản không tồn tại');
+            }
+            finally{
+                setLoading(false);
+            }
+
+
+
+
+        }, 800);
+       
     };
  
     return (
         <div className={cx('wrapper')}>
-           
+           {loading&&<div className={cx('loading-container')}>
+            <div className={cx('loading')} /> 
+             <FontAwesomeIcon className={cx('loading-icon')} icon={faSpinner} spin />
+           </div>}
             <h1 className={cx('title')}>LOGIN</h1>
             <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
                 <div className={cx('form-group')}>
@@ -108,7 +123,7 @@ function LoginForm() {
 
                 <div className={cx('btn-group')}>
                     <Button 
-                        small 
+                        medium
                         type="button"  
                         className={cx('custom-btn')} 
                         outline 
@@ -117,7 +132,7 @@ function LoginForm() {
                         Create new account
                     </Button>
                     <Button 
-                        small 
+                        medium 
                         type="submit"  
                         primary 
                         icon={<FontAwesomeIcon icon={faRightFromBracket} />}

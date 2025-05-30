@@ -5,13 +5,13 @@ import Search from '~/components/Search';
 import TopHeader from '~/components/Layouts/TopHeader';
 import Sidebar from '~/components/Sidebar/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloud, faHome, faInbox, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faChartColumn, faChartPie, faCloud, faFeatherPointed, faInbox, faListCheck, faRankingStar, faShoppingBag, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import paths from '~/Config/routes';
 const cx = classNames.bind(Styles);
 const MENU_ITEMS = [
     {
         title: 'KMA Score',
-        icon: <FontAwesomeIcon icon={faHome} className={cx('menu-icon')} />,
+        icon: <FontAwesomeIcon icon={faRankingStar} className={cx('menu-icon')} />,
         to: paths.score,
     },
     {
@@ -25,20 +25,28 @@ const MENU_ITEMS = [
         to: paths.about,
     },
     {
-        title: 'My shop',
+        title: 'Shop',
         icon: <FontAwesomeIcon icon={faShoppingBag} className={cx('menu-icon')} />,
         to: paths.myshop,
     },
+    {
+        title: 'Dashboard',
+        icon: <FontAwesomeIcon icon={faChartColumn} className={cx('menu-icon')} />,
+        to: paths.about,
+    },
 ];
 
-function Header({ title, icon }) {
+function Header() {
+
+    
+     
     return (
         <div className={cx('wrapper')}>
             <TopHeader />
             <div className={cx('header')}>
-                <h1 className={cx('title', 'header-item')}>
-                    {icon && <i className={cx('icon')}>{icon}</i>}
-                    {title}
+                <h1 className={cx('header-item')}>
+                    <FontAwesomeIcon icon={faLayerGroup} />
+                    <h5 className={cx('title')}>KMA Journey</h5>
                 </h1>
                 <Search />
             </div>

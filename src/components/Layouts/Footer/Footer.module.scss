@@ -1,9 +1,20 @@
 .footer {
-    background: url("https://lh3.googleusercontent.com/p/AF1QipOE5Q-nAL1f9oDnnqfqq4VvLT5UH7j_dP0vgWMJ=s1360-w1360-h1020") no-repeat center center/cover;
-    color: #fff;
-    padding: 40px 20px;
-    position: relative;
+    .video-bg {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+       
+        z-index: -1;
+      }
 
+
+
+    color: #fff;
+    padding: 40px 0px;
+    position: relative;
+    
     // Lớp overlay làm tối ảnh nền
     &::before {
         content: "";
@@ -23,6 +34,15 @@
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 20px;
+
+        .footer-section:first-child
+       {
+          padding-left: 100px;
+        }
+        .footer-section:last-child
+       {
+          padding-right: 100px;
+        }
 
         .footer-section {
             flex: 1;
@@ -74,6 +94,13 @@
 }
 .map {
     border-radius: 10px;
+    margin: 0 100px;
     width: 100%;
-    border: 3px solid #fff;
+    
+  
+}
+.copyright{
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
 }

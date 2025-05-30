@@ -19,7 +19,7 @@
     border-radius: 2rem;
     align-items: center;
     padding: 0 1.2rem;
-    min-width: 12rem;
+    min-width: 16rem;
     font-size: 2.2rem;
     font-weight: 400;
     cursor: pointer;
@@ -34,11 +34,17 @@
     margin-bottom: 2.5px;
     padding-right: 8px;
 }
+.title {
+    flex:1;
+    text-align: center;
+}
 .active {
     background-color: var(--primary);
     color: var(--white);
 
     .title {
         color: var(--white);
+     
+        
     }
 }
